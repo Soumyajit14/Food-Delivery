@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Deals - FlavorFinder</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Specific styles for the Deals Page layout */
+        main {
+            padding: 40px 5%;
+            background-color: #f7f7f7;
+        }
+
+        .deals-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .deal-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-decoration: none;
+            color: #333;
+            border: 2px solid #ff5a5f; /* Highlight border */
+        }
+
+        .deal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .deal-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .deal-content {
+            padding: 15px 20px;
+        }
+
+        .deal-content h3 {
+            color: #ff5a5f;
+            margin-top: 0;
+            font-size: 1.6em;
+        }
+
+        .deal-content .tag {
+            background-color: #ff5a5f;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .deal-content p {
+            margin: 5px 0 15px;
+            line-height: 1.5;
+        }
+
+        .deal-content .primary-btn {
+            display: block; /* Make the button full width */
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .deals-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+        <div class="logo">FlavorFinder</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="restaurant.html">Restaurants</a> 
+            <a href="deals.html"style="font-weight: bold; color: #ff5a5f;">Deals</a> 
+            <a href="cart.html"> Cart</a>
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="deals-header">
+            <h1>🎉 Today's Hottest Deals! 🎉</h1>
+            <p>Save big on delivery fees, popular meals, and exclusive restaurant offers.</p>
+        </div>
+
+        <div class="deals-grid">
+            
+            <a href="#" class="deal-card">
+                <img src="https://www.nicepng.com/png/detail/114-1145508_free-home-delivery-png-graphic-free-delivery-boy.png" alt="Delivery Van">
+                <div class="deal-content">
+                    <span class="tag">TOP DEAL</span>
+                    <h3>Free Delivery Over ₹299</h3>
+                    <p>Order from any restaurant with a cart total of ₹299 or more and pay zero delivery fees!</p>
+                    <button class="primary-btn">Claim Offer</button>
+                </div>
+            </a>
+
+            <a href="#" class="deal-card">
+                <img src="https://www.shutterstock.com/image-photo/pizza-special-discount-banner-blank-600nw-2480641543.jpg" alt="Pizza">
+                <div class="deal-content">
+                    <span class="tag">50% OFF</span>
+                    <h3>Half-Price Pizza Tuesdays</h3>
+                    <p>All large pizzas from participating pizzerias are 50% off every Tuesday. Limited time!</p>
+                    <button class="primary-btn">See Restaurants</button>
+                </div>
+            </a>
+            
+            <a href="index.html" class="deal-card">
+                <img src="https://www.shutterstock.com/image-illustration/50-rupee-off-sale-discount-260nw-2157528123.jpg" alt="FLAT50 Coupon">
+                <div class="deal-content">
+                    <span class="tag">COUPON</span>
+                    <h3>Flat ₹50 Discount</h3>
+                    <p>Use code <strong>FLAT50</strong> at checkout to get an instant ₹50 discount on your order.</p>
+                    <button class="primary-btn">Shop Now</button>
+                </div>
+            </a>
+
+            <a href="index.html" class="deal-card">
+                <img src="https://www.shutterstock.com/image-illustration/100-rupee-off-sale-discount-260nw-2160803051.jpg" alt="SAVE100 Coupon">
+                <div class="deal-content">
+                    <span class="tag">COUPON</span>
+                    <h3>Save ₹100 on Orders</h3>
+                    <p>Use code <strong>SAVE100</strong> at checkout to save ₹100. Minimum order may apply.</p>
+                    <button class="primary-btn">Shop Now</button>
+                </div>
+            </a>
+
+            <a href="#" class="deal-card">
+                <img src="https://www.shutterstock.com/image-vector/first-order-text-effect-design-260nw-2513550897.jpg" alt="Coupon">
+                <div class="deal-content">
+                    <span class="tag">NEW USERS</span>
+                    <h3>20% Off Your First Order</h3>
+                    <p>New to FlavorFinder? Get an instant 20% discount on your very first food order.</p>
+                    <button class="primary-btn">Sign Up Now</button>
+                </div>
+            </a>
+            
+            <a href="#" class="deal-card">
+                <img src="https://www.shutterstock.com/image-vector/2x-winner-banner-promotion-flyer-260nw-2498319831.jpg" alt="Rewards">
+                <div class="deal-content">
+                    <span class="tag">REWARDS</span>
+                    <h3>Double Points Weekend</h3>
+                    <p>Earn 2X loyalty points on every order placed this weekend. Redeem for free meals!</p>
+                    <button class="primary-btn">Start Earning</button>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

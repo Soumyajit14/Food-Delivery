@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biryani | FlavorFinder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        main {
+            padding: 40px 5%;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .container h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .item-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .item-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            width: 280px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .item-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-details h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+            color: #333;
+        }
+        .item-details p {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .price {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ff5a5f;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn, .quantity-selector {
+            width: 100%;
+        }
+        .add-to-cart-btn {
+            padding: 12px;
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .quantity-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quantity-btn {
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .quantity-display {
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html"style="font-weight: bold; color: #ff5a5f;">Home</a>
+            <a href="restaurant.html">Restaurants</a>
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a>
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" id="nav-register" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Aromatic Biryani Dishes</h1>
+            <div class="item-grid">
+
+                <div class="item-card" data-name="Chicken Dum Biryani" data-price="350">
+                    <img src="https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-hyderabadi-biryani-01.jpg" alt="Chicken Dum Biryani">
+                    <div class="item-details">
+                        <h2>Chicken Dum Biryani</h2>
+                        <p>Classic slow-cooked 'dum' biryani with fragrant basmati rice, tender chicken, and aromatic spices.</p>
+                        <p class="price">₹350</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Mutton Dum Biryani" data-price="450">
+                    <img src="https://vismaifood.com/storage/app/uploads/public/980/eb9/ed6/thumb__700_0_0_0_auto.jpg" alt="Mutton Dum Biryani">
+                    <div class="item-details">
+                        <h2>Mutton Dum Biryani</h2>
+                        <p>A rich and flavorful biryani made with succulent pieces of mutton, layered with long-grain rice.</p>
+                        <p class="price">₹450</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Veg Biryani" data-price="300">
+                    <img src="https://www.indianveggiedelight.com/wp-content/uploads/2020/04/veg-biryani-instant-pot.jpg" alt="Veg Biryani">
+                    <div class="item-details">
+                        <h2>Veg Biryani</h2>
+                        <p>A delightful vegetarian option loaded with fresh vegetables, paneer, and fragrant spices.</p>
+                        <p class="price">₹300</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card" data-name="Egg Biryani" data-price="280">
+                    <img src="https://cdn.prod.website-files.com/64931d2aee18510b47f4bb1f/64ecfe915ecd79850e280a8e_2kbsvc0cc9tck6by11shwfx2ph0a4pkc.jpeg" alt="Egg Biryani">
+                    <div class="item-details">
+                        <h2>Egg Biryani</h2>
+                        <p>Flavorful basmati rice cooked with boiled eggs and a blend of traditional spices.</p>
+                        <p class="price">₹280</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card" data-name="Biryani & Kebab Combo" data-price="550">
+                    <img src="https://charminarkababhouse.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-06-27-at-4.03.27-AM.jpeg" alt="Biryani & Kebab Combo">
+                    <div class="item-details">
+                        <h2>Biryani & Kebab Combo</h2>
+                        <p>Your choice of Chicken or Veg Biryani served with two pieces of delicious seekh kebab.</p>
+                        <p class="price">₹550</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Family Biryani Combo" data-price="750">
+                    <img src="https://b.zmtcdn.com/data/dish_photos/5d8/13b1c4ea5f1429f230d549bccffaf5d8.jpeg" alt="Family Biryani Combo">
+                    <div class="item-details">
+                        <h2>Family Biryani Combo</h2>
+                        <p>A large handi of Chicken Biryani, perfect for 2-3 people, served with raita and salad.</p>
+                        <p class="price">₹750</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // The JavaScript is the same for all item pages
+        window.onload = function() {
+            initializePage();
+        };
+
+        function initializePage() {
+            const cart = getCart();
+            document.querySelectorAll('.item-card').forEach(card => {
+                const name = card.dataset.name;
+                const cartItem = cart.find(item => item.name === name);
+                if (cartItem) {
+                    updateCardUI(card, cartItem.quantity);
+                }
+            });
+        }
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem('flavorFinderCart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('flavorFinderCart', JSON.stringify(cart));
+        }
+
+        function addToCart(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            const price = parseInt(card.dataset.price);
+            let cart = getCart();
+            cart.push({ name, price, quantity: 1 });
+            saveCart(cart);
+            updateCardUI(card, 1);
+        }
+
+        function incrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity++;
+                saveCart(cart);
+                updateCardUI(card, item.quantity);
+            }
+        }
+
+        function decrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const itemIndex = cart.findIndex(i => i.name === name);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity--;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+                saveCart(cart);
+                updateCardUI(card, cart[itemIndex] ? cart[itemIndex].quantity : 0);
+            }
+        }
+
+        function updateCardUI(card, quantity) {
+            const addToCartBtn = card.querySelector('.add-to-cart-btn');
+            const quantitySelector = card.querySelector('.quantity-selector');
+            const quantityDisplay = card.querySelector('.quantity-display');
+
+            if (quantity > 0) {
+                addToCartBtn.classList.add('hidden');
+                quantitySelector.classList.remove('hidden');
+                quantityDisplay.textContent = quantity;
+            } else {
+                addToCartBtn.classList.remove('hidden');
+                quantitySelector.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

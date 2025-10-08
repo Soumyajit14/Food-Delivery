@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegan Options | FlavorFinder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        main {
+            padding: 40px 5%;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .container h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .item-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .item-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            width: 280px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .item-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-details h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+            color: #333;
+        }
+        .item-details p {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .price {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ff5a5f;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, opacity 0.3s;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #e0484c;
+        }
+        .quantity-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .quantity-btn {
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 40px;
+        }
+        .quantity-display {
+            font-size: 1.4em;
+            font-weight: 600;
+            padding: 0 15px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html" style="font-weight: bold; color: #ff5a5f;">Home</a>
+            <a href="restaurant.html">Restaurants</a>
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a>
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" id="nav-register" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Delicious Vegan Options</h1>
+            <div class="item-grid">
+
+                <div class="item-card" data-name="Vegan Lentil Soup" data-price="250">
+                    <img src="https://www.eatingwell.com/thmb/AZdGSagOj8VtZPnpcVdD8ttRk3k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/vegan-lentil-stew-0b016185b40446ba98409c75dfeaef7f.jpg" alt="Vegan Lentil Soup">
+                    <div class="item-details">
+                        <h2>Vegan Lentil Soup</h2>
+                        <p>A hearty and nutritious soup made with red lentils, vegetables, and aromatic spices.</p>
+                        <p class="price">₹250</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Quinoa Salad" data-price="350">
+                    <img src="https://s.lightorangebean.com/media/20240914152510/Zesty-Vegan-Quinoa-Salad_-done.png" alt="Quinoa Salad">
+                    <div class="item-details">
+                        <h2>Quinoa Salad</h2>
+                        <p>A refreshing salad with fluffy quinoa, chickpeas, cucumber, and a lemon-herb dressing.</p>
+                        <p class="price">₹350</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Tofu Stir-Fry" data-price="420">
+                    <img src="https://iheartvegetables.com/wp-content/uploads/2023/12/Exclusive-Cashew-Tofu-and-Vegetable-Stir-Fry-4364-Large.jpeg" alt="Tofu Stir-Fry">
+                    <div class="item-details">
+                        <h2>Tofu Stir-Fry</h2>
+                        <p>Crispy tofu stir-fried with broccoli, bell peppers, and snap peas in a savory soy-ginger sauce.</p>
+                        <p class="price">₹420</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card" data-name="Chickpea Curry" data-price="380">
+                    <img src="https://rainbowplantlife.com/wp-content/uploads/2023/02/chickpea-curry-cover-photo-1-of-1.jpg" alt="Chickpea Curry">
+                    <div class="item-details">
+                        <h2>Chickpea Curry</h2>
+                        <p>Creamy and flavorful chickpea curry (Chana Masala) served with a side of basmati rice.</p>
+                        <p class="price">₹380</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card" data-name="Vegan Burger" data-price="390">
+                    <img src="https://www.seriouseats.com/thmb/_c-xbP-tch4dpSTxKE1zY16sHo8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20231204-SEA-VeganBurger-FredHardy-00-dbf603c78b694bfd99489b85ab44f4c4.jpg" alt="Vegan Burger">
+                    <div class="item-details">
+                        <h2>Vegan Burger</h2>
+                        <p>A delicious plant-based patty on a whole wheat bun with all the classic fixings.</p>
+                        <p class="price">₹390</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Avocado Toast" data-price="280">
+                    <img src="https://s.lightorangebean.com/media/20240914152419/Vegan-Avocado-Toast_-doner.png" alt="Avocado Toast">
+                    <div class="item-details">
+                        <h2>Avocado Toast</h2>
+                        <p>Smashed avocado on toasted sourdough bread, topped with chili flakes and a squeeze of lime.</p>
+                        <p class="price">₹280</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // NOTE: The JavaScript is identical to the other food pages
+        window.onload = function() {
+            initializePage();
+        };
+
+        function initializePage() {
+            const cart = getCart();
+            document.querySelectorAll('.item-card').forEach(card => {
+                const name = card.dataset.name;
+                const cartItem = cart.find(item => item.name === name);
+                if (cartItem) {
+                    updateCardUI(card, cartItem.quantity);
+                }
+            });
+        }
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem('flavorFinderCart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('flavorFinderCart', JSON.stringify(cart));
+        }
+
+        function addToCart(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            const price = parseInt(card.dataset.price);
+            let cart = getCart();
+            cart.push({ name, price, quantity: 1 });
+            saveCart(cart);
+            updateCardUI(card, 1);
+        }
+
+        function incrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity++;
+                saveCart(cart);
+                updateCardUI(card, item.quantity);
+            }
+        }
+
+        function decrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const itemIndex = cart.findIndex(i => i.name === name);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity--;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+                saveCart(cart);
+                updateCardUI(card, cart[itemIndex] ? cart[itemIndex].quantity : 0);
+            }
+        }
+
+        function updateCardUI(card, quantity) {
+            const addToCartBtn = card.querySelector('.add-to-cart-btn');
+            const quantitySelector = card.querySelector('.quantity-selector');
+            const quantityDisplay = card.querySelector('.quantity-display');
+
+            if (quantity > 0) {
+                addToCartBtn.classList.add('hidden');
+                quantitySelector.classList.remove('hidden');
+                quantityDisplay.textContent = quantity;
+            } else {
+                addToCartBtn.classList.remove('hidden');
+                quantitySelector.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasta | FlavorFinder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        main {
+            padding: 40px 5%;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .container h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .item-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .item-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            width: 280px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .item-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-details h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+            color: #333;
+        }
+        .item-details p {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .price {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ff5a5f;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn, .quantity-selector {
+            width: 100%;
+        }
+        .add-to-cart-btn {
+            padding: 12px;
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .quantity-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quantity-btn {
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .quantity-display {
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html" style="font-weight: bold; color: #ff5a5f;">Home</a>
+            <a href="restaurant.html">Restaurants</a>
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a>
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" id="nav-register" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Classic Pasta Dishes</h1>
+            <div class="item-grid">
+
+                <div class="item-card" data-name="Spaghetti Aglio e Olio" data-price="380">
+                    <img src="https://www.simplyrecipes.com/thmb/gjS-FSuYnqK3fclkE2fWhYl1VWQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Spaghetti-Aglio-e-Olio-LEAD-2-c8e7e8c6edb04a8691463c6ea8cd4ba1.jpg" alt="Spaghetti Aglio e Olio">
+                    <div class="item-details">
+                        <h2>Spaghetti Aglio e Olio</h2>
+                        <p>Classic spaghetti tossed with garlic, olive oil, chili flakes, and fresh parsley.</p>
+                        <p class="price">₹380</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Penne Arrabiata" data-price="420">
+                    <img src="https://www.giallozafferano.com/images/260-26061/Penne-all-arrabbiata_1200x800.jpg" alt="Penne Arrabiata">
+                    <div class="item-details">
+                        <h2>Penne Arrabiata</h2>
+                        <p>Penne pasta in a spicy tomato sauce made with garlic, tomatoes, and dried red chili peppers.</p>
+                        <p class="price">₹420</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Creamy Mushroom Pasta" data-price="480">
+                    <img src="https://momsdinner.net/wp-content/uploads/2020/03/Mushroom-Pasta-Recipe.jpg" alt="Creamy Mushroom Pasta">
+                    <div class="item-details">
+                        <h2>Creamy Mushroom Pasta</h2>
+                        <p>Fettuccine in a rich and creamy parmesan sauce with sautéed mushrooms and herbs.</p>
+                        <p class="price">₹480</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card" data-name="Pesto Pasta Salad" data-price="400">
+                    <img src="https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2020-06-Pesto-Pasta-Salad%2FPesto-Pasta-Salad530" alt="Pesto Pasta Salad">
+                    <div class="item-details">
+                        <h2>Pesto Pasta Salad</h2>
+                        <p>Cold fusilli pasta salad with basil pesto, cherry tomatoes, and mozzarella pearls.</p>
+                        <p class="price">₹400</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Pasta & Garlic Bread Combo" data-price="550">
+                    <img src="https://enjoyinfourseason.com/wp-content/uploads/2022/05/Fourseason-PASTA-WITH-GARLIC-BREAD-WHITE.jpg" alt="Pasta & Garlic Bread Combo">
+                    <div class="item-details">
+                        <h2>Pasta & Garlic Bread Combo</h2>
+                        <p>Your choice of any pasta served with a side of two cheesy garlic bread slices.</p>
+                        <p class="price">₹550</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card" data-name="Pasta & Drink Combo" data-price="500">
+                    <img src="https://thecocktailbird.com/wp-content/uploads/2023/11/3-2-1024x792.png" alt="Pasta & Drink Combo">
+                    <div class="item-details">
+                        <h2>Pasta & Drink Combo</h2>
+                        <p>Enjoy any of our delicious pastas along with a refreshing soft drink of your choice.</p>
+                        <p class="price">₹500</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // The JavaScript is the same for all item pages
+        window.onload = function() {
+            initializePage();
+        };
+
+        function initializePage() {
+            const cart = getCart();
+            document.querySelectorAll('.item-card').forEach(card => {
+                const name = card.dataset.name;
+                const cartItem = cart.find(item => item.name === name);
+                if (cartItem) {
+                    updateCardUI(card, cartItem.quantity);
+                }
+            });
+        }
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem('flavorFinderCart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('flavorFinderCart', JSON.stringify(cart));
+        }
+
+        function addToCart(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            const price = parseInt(card.dataset.price);
+            let cart = getCart();
+            cart.push({ name, price, quantity: 1 });
+            saveCart(cart);
+            updateCardUI(card, 1);
+        }
+
+        function incrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity++;
+                saveCart(cart);
+                updateCardUI(card, item.quantity);
+            }
+        }
+
+        function decrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const itemIndex = cart.findIndex(i => i.name === name);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity--;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+                saveCart(cart);
+                updateCardUI(card, cart[itemIndex] ? cart[itemIndex].quantity : 0);
+            }
+        }
+
+        function updateCardUI(card, quantity) {
+            const addToCartBtn = card.querySelector('.add-to-cart-btn');
+            const quantitySelector = card.querySelector('.quantity-selector');
+            const quantityDisplay = card.querySelector('.quantity-display');
+
+            if (quantity > 0) {
+                addToCartBtn.classList.add('hidden');
+                quantitySelector.classList.remove('hidden');
+                quantityDisplay.textContent = quantity;
+            } else {
+                addToCartBtn.classList.remove('hidden');
+                quantitySelector.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

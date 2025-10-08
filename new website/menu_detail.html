@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Spice House | Menu & Booking</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- General Layout --- */
+        main {
+            padding: 40px 5%;
+            background-color: #f7f7f7;
+        }
+
+        #restaurant-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            align-items: flex-start;
+        }
+
+        /* --- Main Info Column --- */
+        #info-menu-column {
+            flex: 2;
+        }
+
+        #info-menu-column h1 {
+            color: #ff5a5f;
+            font-size: 2.8em;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .meta-details {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .rating-chip {
+            background-color: #4CAF50;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        
+        /* --- Menu and Price Section --- */
+        .menu-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .menu-item-price {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .menu-item-price span:first-child {
+            font-weight: 500;
+        }
+        .menu-item-price span:last-child {
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* --- Booking & Price Column --- */
+        #booking-column {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .price-per-person {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .price-per-person h2 {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .price-per-person .range {
+            font-size: 2em;
+            font-weight: 700;
+            color: #ff5a5f;
+            display: block;
+        }
+
+        #booking-form h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        #booking-form select, #booking-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            #restaurant-container {
+                flex-direction: column;
+            }
+            #booking-column {
+                order: -1; /* Put the booking option first on mobile */
+                position: static;
+                width: 100%;
+            }
+            #info-menu-column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html">Home</a>
+            <a href="restaurant.html">Restaurants</a> 
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="auth.html" id="nav-signin">Sign In</a>
+            <a href="auth.html" class="primary-btn" style="text-decoration: none; padding: 10px 20px;" id="nav-register">Register</a>
+            <a href="#" style="display: none;" id="nav-help">Help</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="restaurant-container">
+            
+            <div id="info-menu-column">
+                <h1>The Spice House 🍔</h1>
+                
+                <div class="meta-details">
+                    <span class="rating-chip">⭐️ 4.7</span>
+                    <span>Barasat, Kalkata</span>
+                    <span>Cuisine: Indian, Seafood, Fast Food</span>
+                </div>
+
+                <p>The Spice House is renowned for its rich Indian cuisine, specializing in authentic seafood curries and tandoori dishes. We offer a comfortable dining experience and fast delivery service.</p>
+                
+                <div class="menu-section">
+                    <h2>Menu Highlights</h2>
+                    
+                    <div class="menu-item-price"><span>Butter Chicken Masala</span><span>₹450</span></div>
+                    <div class="menu-item-price"><span>Famous Seafood Thali</span><span>₹680</span></div>
+                    <div class="menu-item-price"><span>Tandoori Platter (Mixed)</span><span>₹899</span></div>
+                    <div class="menu-item-price"><span>Garlic Naan (Single)</span><span>₹80</span></div>
+                    <div class="menu-item-price"><span>Gulab Jamun (Dessert)</span><span>₹150</span></div>
+                    
+                    <p style="margin-top: 20px; font-style: italic;">*Prices are for dine-in. Delivery prices may vary slightly.</p>
+                </div>
+            </div>
+
+            <div id="booking-column">
+                
+                <div class="price-per-person">
+                    <h2>Average Price Per Person</h2>
+                    <span class="range">₹600 - ₹1200</span>
+                    <p style="font-size: 0.9em; color: #777;">(Excluding tax and drinks)</p>
+                </div>
+                
+                <div id="booking-form">
+                    <h3>Book Your Table</h3>
+                    <form onsubmit="handleBooking(event)">
+                        <input type="date" required>
+                        
+                        <select required>
+                            <option value="">-- Select Time --</option>
+                            <option>7:00 PM</option>
+                            <option>8:00 PM</option>
+                            <option>9:00 PM</option>
+                        </select>
+                        
+                        <select required>
+                            <option value="">-- Number of Guests --</option>
+                            <option>2 Guests</option>
+                            <option>4 Guests</option>
+                            <option>6 Guests</option>
+                            <option>8+ Guests</option>
+                        </select>
+
+                        <button type="submit" class="primary-btn" style="width: 100%; padding: 12px;">
+                            Book Now
+                        </button>
+                    </form>
+                    
+                    <p style="margin-top: 20px; text-align: center;">— OR —</p>
+                    
+                    <a href="index.html" class="primary-btn" style="width: 100%; padding: 12px; background-color: #5cb85c; border-radius: 8px; color: white; display: inline-block; text-align: center;">
+                        Start Delivery Order
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function handleBooking(event) {
+            event.preventDefault();
+            alert("Reservation Request Sent! We will confirm your booking shortly.");
+        }
+        
+        // Add login status check for consistent navigation bar (from previous steps)
+        function checkLoginStatus() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const navRegister = document.getElementById('nav-register');
+            const navHelp = document.getElementById('nav-help');
+
+            if (urlParams.get('status') === 'logged_in') {
+                if (navRegister && navHelp) {
+                    navRegister.style.display = 'none';
+                    navHelp.style.display = 'inline-block';
+                    navHelp.href = 'help.html'; 
+                }
+            }
+        }
+        checkLoginStatus();
+    </script>
+</body>
+</html>

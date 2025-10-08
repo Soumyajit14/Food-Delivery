@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Restaurants - FlavorFinder</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS styles remain the same as your previous version */
+        main {
+            padding: 40px 5%;
+            background-color: #f7f7f7;
+        }
+        #search-bar-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #search-bar-container input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: none;
+            font-size: 1em;
+            outline: none;
+            border-radius: 6px;
+        }
+        #search-bar-container button {
+            padding: 12px 25px;
+            font-weight: 600;
+        }
+        #restaurant-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .restaurant-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .restaurant-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .restaurant-card h3 {
+            margin: 15px 15px 10px;
+            font-size: 1.5em;
+            color: #ff5a5f;
+        }
+        .restaurant-card .details {
+            padding: 0 15px 15px;
+            color: #777;
+            font-size: 0.95em;
+        }
+        @media (max-width: 600px) {
+            #restaurant-list-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        #see-all-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        #see-all-btn {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        #see-all-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html">Home</a>
+            <a href="restaurant.html"style="font-weight: bold; color: #ff5a5f;">Restaurants</a> 
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a>
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" style="text-decoration: none; padding: 10px 20px;" id="nav-register">Sign In / Register</a>
+            <a href="#" style="display: none;" id="nav-help">Help</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>All Local Restaurants</h1>
+        
+        <div id="search-bar-container">
+            <input type="text" id="restaurant-search" placeholder="Search by restaurant name, cuisine, or dish..." />
+            <button class="primary-btn" onclick="searchRestaurants()">Search</button>
+        </div>
+        
+        <p>Click on any restaurant below to view its full menu and place an order.</p>
+
+        <div id="restaurant-list-grid">
+            
+            <a href="spice_house.html" class="restaurant-card">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/5d/cb/b4/famous-seafood-restaurant.jpg?w=900&h=500&s=1" alt="The Spice House">
+                <h3>The Spice House </h3>
+                <div class="details">
+                    <p>⭐️ 4.7 • Barasat, Kalkata</p>
+                    <p>25–35 min • Price Range: ₹600 - ₹1200</p>
+                </div>
+            </a>
+
+            <a href="bang_cafe.html" class="restaurant-card">
+                <img src="https://dt4l9bx31tioh.cloudfront.net/eazymedia/restaurant/688077/restaurant020230415060350.jpeg?width=750&height=436&mode=crop" alt="The Bang Cafe">
+                <h3>The Bang Cafe </h3>
+                <div class="details">
+                    <p>⭐️ 4.8 • Barasat, Kalkata</p>
+                    <p>30–40 min • Price Range: ₹500 - ₹1000</p>
+                </div>
+            </a>
+            
+            <a href="desi_lane.html" class="restaurant-card">
+                <img src="https://b.zmtcdn.com/data/pictures/0/20536950/53078845fd4b786936f715f22b0b750f.jpeg" alt="Desi Lane">
+                <h3>Desi Lane </h3>
+                <div class="details">
+                    <p>⭐️ 4.5 • Madhyamgram, Kalkata</p>
+                    <p>15–25 min • Price Range: ₹800 - ₹1500</p>
+                </div>
+            </a>
+
+            <a href="barbeque_nation.html" class="restaurant-card">
+                <img src="https://b.zmtcdn.com/data/pictures/5/20235/f0b1afd665c15bb5054feaf8626d7164_featured_v2.jpg" alt="Barbeque Nation">
+                <h3>Barbeque Nation </h3>
+                <div class="details">
+                    <p>⭐️ 4.9 • Kalyani, Kalkata</p>
+                    <p>20–30 min • Price Range: ₹1000 - ₹2500</p>
+                </div>
+            </a>
+            
+        </div>
+        
+        <div id="see-all-container">
+         <a href="#" class="see-all" id="see-all-link" onclick="expandCategories(event)">See All Restaurants →</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function searchRestaurants() {
+            const query = document.getElementById('restaurant-search').value.trim();
+            if (query) {
+                alert(`Filtering results for: "${query}"`);
+            } else {
+                alert("Please enter a search term.");
+            }
+        }
+        
+        function handleSeeAll() {
+            alert("Loading 8 more restaurants...");
+            document.getElementById('see-all-btn').textContent = "All Restaurants Loaded!";
+            document.getElementById('see-all-btn').disabled = true;
+        }
+
+        // Add login status check for consistent navigation bar
+        function checkLoginStatus() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('status') === 'logged_in') {
+                document.getElementById('nav-register').style.display = 'none';
+                document.getElementById('nav-help').style.display = 'inline-block';
+                document.getElementById('nav-help').href = 'help.html';
+            }
+        }
+        checkLoginStatus();
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support | FlavorFinder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        main {
+            padding: 40px 5%;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .container h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        details {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+        summary {
+            font-weight: 600;
+            font-size: 1.2em;
+            cursor: pointer;
+            list-style: none; /* Hide the default marker */
+            position: relative;
+            padding-right: 25px;
+        }
+        summary::after { /* Custom arrow */
+            content: '▼';
+            position: absolute;
+            right: 0;
+            font-size: 0.8em;
+            transition: transform 0.2s;
+        }
+        details[open] summary::after {
+            transform: rotate(-180deg);
+        }
+        .answer {
+            margin-top: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .contact-info {
+            margin-top: 30px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html">Home</a>
+            <a href="restaurant.html">Restaurants</a>
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a>
+            <a href="help.html" style="font-weight: bold; color: #ff5a5f;">Help</a>
+            <a href="auth.html" class="primary-btn" id="nav-register" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Help & Support</h1>
+
+            <details>
+                <summary>How do I place an order?</summary>
+                <div class="answer">
+                    <p>To place an order, simply browse our food categories like Pizza, Sushi, or Burgers. On the item page, use the "+" button to add items to your cart. When you're ready, click on "Cart" in the navigation bar to proceed to checkout.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>How does online payment work?</summary>
+                <div class="answer">
+                    <p>When you choose "Pay Via Online" at checkout, you will be redirected to a payment page. This page will show a QR code with the total amount. Simply scan this QR code with any UPI app (like Google Pay, PhonePe, etc.) to complete your payment.</p>
+                </div>
+            </details>
+            
+            <details>
+                <summary>How do I book a table at a restaurant?</summary>
+                <div class="answer">
+                    <p>Navigate to the "Restaurants" section and select a restaurant. On the restaurant's page, you will find a booking form. Select your desired date, time, and number of guests to see the estimated price. Follow the steps to confirm and pay for your booking.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>Can I apply a coupon to my order?</summary>
+                <div class="answer">
+                    <p>Yes! On the cart/checkout page, there is a "Coupon Code" field. Enter your coupon code and click "Apply". If the code is valid, the discount will be reflected in your order summary.</p>
+                </div>
+            </details>
+
+            <div class="contact-info">
+                <h2>Still need help?</h2>
+                <p>If you have any other questions, feel free to contact us at:<br><strong>Call: +918900412641</strong><br><strong>Email: nandisoumyajit2@gmail.com</strong></p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+</body>
+</html>

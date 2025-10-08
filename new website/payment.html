@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+    <style>
+        main { padding: 60px 5%; background-color: #f7f7f7; display: flex; justify-content: center; align-items: center; min-height: 80vh; }
+        .payment-container { background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); text-align: center; max-width: 400px; }
+        #qr-code-canvas { width: 250px; height: 250px; margin: 20px auto; display: block; }
+        .amount-display { font-size: 2.5em; font-weight: 700; color: #ff5a5f; margin: 20px 0; }
+        .complete-btn { width: 100%; padding: 15px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;"><div class="logo">FlavorFinder</div></a>
+        <nav id="main-nav">
+            <a href="index.html">Home</a>
+            <a href="restaurant.html">Restaurants</a> 
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a> 
+            <a href="auth.html" class="primary-btn" id="nav-register" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+            <a href="#" style="display: none;" id="nav-help">Help</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="payment-container">
+            <h1 id="payment-title">Scan to Pay</h1>
+            <p>Use any UPI app to complete your transaction.</p>
+            <canvas id="qr-code-canvas"></canvas>
+            <div class="amount-display">
+                Total: ₹<span id="payment-amount">0.00</span>
+            </div>
+            <button class="complete-btn" onclick="finishTransaction()">I've Completed The Payment</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const upiId = "8900412641@yespop";
+            const urlParams = new URLSearchParams(window.location.search);
+            const amount = urlParams.get('amount');
+            const origin = urlParams.get('origin');
+            const payee = urlParams.get('payee'); // Get the payee name from URL
+
+            if (amount && parseFloat(amount) > 0) {
+                const parsedAmount = parseFloat(amount);
+                document.getElementById('payment-amount').textContent = parsedAmount.toFixed(2);
+
+                // Set payee name based on the origin or payee param
+                let payeeName = payee || "The Spice House"; // Use payee from URL, or a default
+                if (origin === 'booking') {
+                    document.getElementById('payment-title').textContent = `Pay for ${payeeName}`;
+                } else {
+                    payeeName = "The Spice House Order";
+                    document.getElementById('payment-title').textContent = "Pay for Order";
+                }
+
+                const upiUrl = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${parsedAmount.toFixed(2)}&cu=INR`;
+                
+                new QRious({
+                    element: document.getElementById('qr-code-canvas'),
+                    value: upiUrl,
+                    size: 250
+                });
+            } else {
+                document.getElementById('payment-amount').textContent = 'Error';
+                document.querySelector('.payment-container p').textContent = 'Amount not found. Please go back and try again.';
+            }
+        };
+
+        function finishTransaction() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const origin = urlParams.get('origin');
+
+            if (origin === 'cart') {
+                localStorage.removeItem('flavorFinderCart');
+                alert("Thank you! Your payment has been confirmed. Your order is on its way!");
+            } else if (origin === 'booking') {
+                alert("Thank you! Your payment has been confirmed. Your booking is complete!");
+            } else {
+                alert("Payment confirmed. Thank you!");
+            }
+            
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

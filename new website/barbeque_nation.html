@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbeque Nation | Menu & Booking</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        main { padding: 40px 5%; background-color: #f7f7f7; }
+        #restaurant-container { display: flex; gap: 40px; max-width: 1200px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); align-items: flex-start; }
+        #info-menu-column { flex: 2; }
+        #info-menu-column h1 { color: #ff5a5f; font-size: 2.8em; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        .meta-details { margin-bottom: 20px; color: #555; font-size: 1.1em; }
+        .rating-chip { background-color: #4CAF50; color: white; padding: 4px 8px; border-radius: 4px; font-weight: 600; margin-right: 15px; }
+        .menu-section h2 { font-size: 1.8em; color: #333; margin-top: 30px; }
+        .menu-item-price { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #ddd; }
+        #booking-column { flex: 1; min-width: 300px; padding: 20px; background-color: #f0f0f0; border-radius: 8px; position: sticky; top: 100px; }
+        .price-per-person { margin-bottom: 30px; text-align: center; }
+        .price-per-person h2 { font-size: 1.3em; color: #555; margin-bottom: 5px; }
+        .price-per-person .range { font-size: 2em; font-weight: 700; color: #ff5a5f; display: block; }
+        #booking-form-step-1 h3, #booking-form-step-2 h3 { margin-top: 0; color: #333; }
+        #booking-form-step-1 select, #booking-form-step-1 input, #booking-form-step-2 select, #booking-form-step-2 input, #booking-form-step-2 textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; resize: vertical; }
+        #time-select option:disabled { color: #ccc; }
+        @media (max-width: 900px) { #restaurant-container { flex-direction: column; } #booking-column { order: -1; position: static; width: 100%; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html">Home</a>
+            <a href="restaurant.html"style="font-weight: bold; color: #ff5a5f;">Restaurants</a> 
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a>
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" style="text-decoration: none; padding: 10px 20px;" id="nav-register">Sign In / Register</a>
+            <a href="#" style="display: none;" id="nav-help">Help</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="restaurant-container">
+            <div id="info-menu-column">
+                <h1>Barbeque Nation</h1>
+                <div class="meta-details">
+                    <span class="rating-chip">⭐️ 4.9</span>
+                    <span>Kalyani, Kolkata</span>
+                    <span>Cuisine: All Types of Dishes</span>
+                </div>
+                <p>Barbeque Nation is renowned for its rich Indian cuisine, with all types of dishes. We offer a comfortable dining experience and fast delivery service.</p>
+                <div class="menu-section">
+                    <h2>Menu Highlights</h2>
+                    <div class="menu-item-price"><span>Butter Chicken Masala</span><span>₹450</span></div>
+                    <div class="menu-item-price"><span>Famous Seafood Thali</span><span>₹680</span></div>
+                    <div class="menu-item-price"><span>Tandoori Platter (Mixed)</span><span>₹899</span></div>
+                    <div class="menu-item-price"><span>Garlic Naan (Single)</span><span>₹80</span></div>
+                    <div class="menu-item-price"><span>Gulab Jamun (Dessert)</span><span>₹150</span></div>
+                    <p style="margin-top: 20px; font-style: italic;">*Prices are for dine-in. Delivery prices may vary slightly.</p>
+                </div>
+            </div>
+
+            <div id="booking-column">
+                <div class="price-per-person">
+                    <h2>Estimated Total Price</h2>
+                    <span class="range" id="price-display">Select Time & Guests</span>
+                    <p style="font-size: 0.9em; color: #777;">(Excluding tax and drinks, total)</p>
+                </div>
+                
+                <div id="booking-form-step-1">
+                    <h3>Book Your Table (Step 1 of 2)</h3>
+                    <form id="booking-form-element" onsubmit="handleBooking(event)">
+                        <input type="date" id="date-select" required>
+                        <select id="time-select" required>
+                            <option value="">-- Select Time --</option>
+                            <option value="6:00 PM">6:00 PM</option>
+                            <option value="7:00 PM">7:00 PM</option>
+                            <option value="8:00 PM">8:00 PM</option>
+                            <option value="9:00 PM">9:00 PM</option>
+                        </select>
+                        <select id="guest-select" required>
+                            <option value="">-- Number of Guests --</option>
+                            <option value="2">2 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="6">6 Guests</option>
+                            <option value="8">8 Guests</option>
+                        </select>
+                        <button type="submit" class="primary-btn" style="width: 100%; padding: 12px;">Next: Enter Details</button>
+                    </form>
+                </div>
+                
+                <div id="booking-form-step-2" style="display: none;">
+                    <h3>Your Details (Step 2 of 2)</h3>
+                    <form onsubmit="submitCustomerDetails(event)">
+                        <input type="text" id="cust-name" placeholder="Full Name" required>
+                        <input type="tel" id="cust-mobile" placeholder="Mobile Number" required pattern="[0-9]{10}">
+                        <input type="email" id="cust-email" placeholder="Email (Optional)">
+                        <textarea id="cust-note" placeholder="Special Request/Note (e.g., anniversary)"></textarea>
+                        <button type="submit" class="primary-btn" style="width: 100%; padding: 12px; background-color: #5cb85c;">Confirm & Pay Total ₹<span id="final-total">0</span></button>
+                        <button type="button" onclick="goBackToBooking()" style="width: 100%; padding: 12px; margin-top: 10px; background-color: #aaa; color: white; border: none; border-radius: 6px; cursor: pointer;">← Go Back</button>
+                    </form>
+                </div>
+                
+                <div id="delivery-option" style="margin-top: 20px;">
+                    <p style="text-align: center;">— OR —</p>
+                    <a href="index.html" class="primary-btn" style="width: 100%; padding: 12px; background-color: #5cb85c; border-radius: 8px; color: white; display: inline-block; text-align: center;">Start Delivery Order</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const TIME_PRICES = { "6:00 PM": 1000, "7:00 PM": 1500, "8:00 PM": 2000, "9:00 PM": 2500 };
+        let reservationData = {}; 
+        const dateSelect = document.getElementById('date-select');
+        const timeSelect = document.getElementById('time-select');
+        const guestSelect = document.getElementById('guest-select');
+        const priceDisplay = document.getElementById('price-display');
+        const step1 = document.getElementById('booking-form-step-1');
+        const step2 = document.getElementById('booking-form-step-2');
+        const finalTotalDisplay = document.getElementById('final-total');
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayString = `${yyyy}-${mm}-${dd}`;
+        dateSelect.min = todayString;
+        dateSelect.value = todayString;
+
+        function validateTimeSlots() {
+            const selectedDate = dateSelect.value;
+            const now = new Date();
+            const currentHour = now.getHours();
+            for (const option of timeSelect.options) { option.disabled = false; }
+            if (selectedDate === todayString) {
+                for (const option of timeSelect.options) {
+                    if (option.value) {
+                        const optionHour = parseInt(option.value.split(':')[0]);
+                        const hourIn24 = option.value.includes('PM') && optionHour !== 12 ? optionHour + 12 : optionHour;
+                        if (hourIn24 <= currentHour) { option.disabled = true; }
+                    }
+                }
+            }
+            if(timeSelect.options[timeSelect.selectedIndex].disabled) {
+                timeSelect.value = "";
+                updateTotalPriceDisplay();
+            }
+        }
+
+        function updateTotalPriceDisplay() {
+            const selectedTime = timeSelect.value;
+            const selectedGuests = parseInt(guestSelect.value);
+            const pricePerPerson = TIME_PRICES[selectedTime];
+            if (pricePerPerson && selectedGuests > 0) {
+                const totalPrice = pricePerPerson * selectedGuests;
+                priceDisplay.innerHTML = `₹${totalPrice}`;
+                priceDisplay.style.color = '#4CAF50'; 
+                return totalPrice;
+            } else {
+                priceDisplay.innerHTML = 'Select Time & Guests';
+                priceDisplay.style.color = '#ff5a5f';
+                return 0;
+            }
+        }
+
+        timeSelect.addEventListener('change', updateTotalPriceDisplay);
+        guestSelect.addEventListener('change', updateTotalPriceDisplay);
+        dateSelect.addEventListener('change', validateTimeSlots);
+
+        function handleBooking(event) {
+            event.preventDefault();
+            const selectedTime = timeSelect.value;
+            const selectedDate = dateSelect.value;
+            const guests = parseInt(guestSelect.value);
+            const pricePerPerson = TIME_PRICES[selectedTime];
+            if (!selectedTime || !selectedDate || !guests) {
+                alert("Please select a date, time, and number of guests to proceed.");
+                return;
+            }
+            const totalPrice = pricePerPerson * guests;
+            reservationData = { date: selectedDate, time: selectedTime, guests, totalPrice, pricePerPerson };
+            finalTotalDisplay.textContent = totalPrice;
+            step1.style.display = 'none';
+            step2.style.display = 'block';
+        }
+
+        function submitCustomerDetails(event) {
+            event.preventDefault();
+            reservationData.name = document.getElementById('cust-name').value;
+            reservationData.mobile = document.getElementById('cust-mobile').value;
+            reservationData.email = document.getElementById('cust-email').value;
+            reservationData.note = document.getElementById('cust-note').value;
+            const { totalPrice } = reservationData;
+            // Redirect to the payment page with amount, origin, and payee name
+            window.location.href = `payment.html?amount=${totalPrice}&origin=booking&payee=BarbequeNation`;
+        }
+
+        function goBackToBooking() {
+            step2.style.display = 'none';
+            step1.style.display = 'block';
+        }
+        
+        validateTimeSlots(); // Run on page load
+    </script>
+</body>
+</html>

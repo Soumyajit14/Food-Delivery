@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Your Order Summary</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        main { padding: 40px 5%; background-color: #f7f7f7; display: flex; gap: 40px; align-items: flex-start; }
+        #order-summary { flex: 2; background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+        #checkout-form-container { flex: 1; background-color: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+        #cart-items-detail { list-style: none; padding: 0; margin-bottom: 20px; }
+        #cart-items-detail li { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px dashed #ddd; }
+        .item-name { font-weight: 600; flex: 3; }
+        .item-quantity { flex: 1; text-align: center; }
+        .item-price-total { flex: 1; text-align: right; font-weight: 700; }
+        #price-breakdown { padding-top: 15px; border-top: 2px solid #eee; }
+        #price-breakdown div { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        #grand-total { font-size: 1.5em; font-weight: 700; color: #ff5a5f; padding-top: 10px; border-top: 1px dashed #ccc; }
+        #delivery-form input, #delivery-form textarea, #delivery-form select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        #delivery-form label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .coupon-container { display: flex; gap: 10px; margin-bottom: 20px; }
+        .coupon-container input { flex-grow: 1; margin-bottom: 0; }
+        .apply-btn { padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        @media (max-width: 768px) { main { flex-direction: column; } #checkout-form-container { order: -1; flex: none; width: 100%; } #order-summary { flex: none; width: 100%; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;"><div class="logo">FlavorFinder</div></a>
+        <nav id="main-nav">
+            <a href="index.html">Home</a>
+            <a href="restaurant.html">Restaurants</a> 
+            <a href="deals.html">Deals</a>
+            <a href="cart.html" style="font-weight: bold; color: #ff5a5f;">Cart</a> 
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" id="nav-register" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+            <a href="#" style="display: none;" id="nav-help">Help</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="checkout-form-container">
+            <h2>Delivery & Contact</h2>
+            <form id="delivery-form" onsubmit="handleOrder(event)">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required>
+                <label for="address">Delivery Address</label>
+                <textarea id="address" rows="3" required></textarea>
+                <label for="coupon-input">Coupon Code</label>
+                <div class="coupon-container">
+                    <input type="text" id="coupon-input" >
+                    <button type="button" class="apply-btn" onclick="applyCoupon()">Apply</button>
+                </div>
+                <label for="payment">Payment Method</label>
+                <select id="payment" required>
+                    <option value="">-- Select --</option>
+                    <option value="card">Pay Via Online</option>
+                    <option value="cash">Cash on Delivery</option>
+                </select>
+                <button type="submit" class="primary-btn" style="width: 100%; padding: 15px;">Place Order & Pay</button>
+            </form>
+        </div>
+
+        <div id="order-summary">
+            <h2>Order Summary</h2>
+            <div style="display: flex; justify-content: space-between; font-weight: bold; padding-bottom: 5px; border-bottom: 1px solid #ddd;">
+                <span class="item-name">Item</span>
+                <span class="item-quantity">Qty</span>
+                <span class="item-price-total">Price</span>
+            </div>
+            
+            <ul id="cart-items-detail"></ul>
+
+            <div id="price-breakdown">
+                <div><span>Subtotal:</span> <span id="summary-subtotal">₹0.00</span></div>
+                <div><span>Delivery Fee:</span> <span id="summary-delivery">₹0.00</span></div>
+                <div><span>Service Tax (5%):</span> <span id="summary-tax">₹0.00</span></div>
+                <div><span>Discount:</span> <span id="summary-discount">- ₹0.00</span></div>
+            </div>
+            <div id="grand-total">
+                <span>Grand Total:</span> ₹<span id="summary-total">0.00</span>
+            </div>
+            <button onclick="clearCart()" style="width:100%; margin-top: 20px; padding: 10px; background-color: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;">Clear Cart</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const VALID_COUPONS = { "FLAT50": 50, "SAVE100": 100 };
+        let appliedDiscount = 0;
+
+        window.onload = function() { renderCartItems(); };
+
+        function applyCoupon() {
+            const code = document.getElementById('coupon-input').value.toUpperCase();
+            if (VALID_COUPONS[code]) {
+                appliedDiscount = VALID_COUPONS[code];
+                alert(`Success! Coupon "${code}" applied.`);
+            } else {
+                appliedDiscount = 0;
+                alert("Invalid coupon code.");
+            }
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const cart = JSON.parse(localStorage.getItem('flavorFinderCart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items-detail');
+            const subtotalEl = document.getElementById('summary-subtotal');
+            const deliveryEl = document.getElementById('summary-delivery');
+            const taxEl = document.getElementById('summary-tax');
+            const discountEl = document.getElementById('summary-discount');
+            const totalEl = document.getElementById('summary-total');
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<li>Your cart is empty.</li>';
+                subtotalEl.textContent = '₹0.00'; deliveryEl.textContent = '₹0.00'; taxEl.textContent = '₹0.00'; discountEl.textContent = '- ₹0.00'; totalEl.textContent = '0.00';
+                return;
+            }
+            let subtotal = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="item-name">${item.name}</span><span class="item-quantity">${item.quantity}</span><span class="item-price-total">₹${itemTotal.toFixed(2)}</span>`;
+                cartItemsContainer.appendChild(li);
+            });
+            const deliveryFee = 20.00;
+            const tax = subtotal * 0.05;
+            const grandTotal = Math.max(0, subtotal + deliveryFee + tax - appliedDiscount);
+            subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
+            deliveryEl.textContent = `₹${deliveryFee.toFixed(2)}`;
+            taxEl.textContent = `₹${tax.toFixed(2)}`;
+            discountEl.textContent = `- ₹${appliedDiscount.toFixed(2)}`;
+            totalEl.textContent = grandTotal.toFixed(2);
+        }
+
+        function clearCart() {
+            if (confirm("Are you sure?")) {
+                localStorage.removeItem('flavorFinderCart');
+                appliedDiscount = 0;
+                document.getElementById('coupon-input').value = '';
+                renderCartItems();
+            }
+        }
+
+        function handleOrder(event) {
+            event.preventDefault();
+            const total = document.getElementById('summary-total').textContent;
+            const paymentMethod = document.getElementById('payment').value;
+            const name = document.getElementById('name').value;
+            const cart = JSON.parse(localStorage.getItem('flavorFinderCart')) || [];
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items before placing an order.");
+                return;
+            }
+            if (paymentMethod === 'card') {
+                // Redirect to payment page with origin=cart
+                window.location.href = `payment.html?amount=${total}&origin=cart`;
+            } else {
+                alert(`Thank you, ${name}! Your order for ₹${total} (Cash on Delivery) has been placed.`);
+                localStorage.removeItem('flavorFinderCart');
+                window.location.href = 'index.html'; 
+            }
+        }
+    </script>
+</body>
+</html>

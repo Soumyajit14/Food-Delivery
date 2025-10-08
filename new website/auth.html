@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In or Register</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Specific styles for the auth page layout */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-container h2 {
+            margin-bottom: 25px;
+            font-size: 2em;
+            color: #ff5a5f;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .toggle-text {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .toggle-link {
+            color: #ff5a5f;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Hide the full name field by default (for Sign In mode) */
+        .name-group {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="auth-container">
+        <div class="logo">FlavorFinder </div>
+        <div class="logo">By Soumyajit Nandi</div>
+        <h2 id="auth-title">Sign In</h2>
+        
+        <form id="auth-form">
+            <div class="form-group name-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full-name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="primary-btn" id="submit-button" style="width: 100%; margin-top: 10px;">Sign In</button>
+        </form>
+
+        <div class="toggle-text">
+            Don't have an account? <span class="toggle-link" onclick="toggleMode()">Register Now</span>
+        </div>
+    </div>
+
+    <script>
+        const authTitle = document.getElementById('auth-title');
+        const nameGroup = document.querySelector('.name-group');
+        const submitButton = document.getElementById('submit-button');
+        const toggleText = document.querySelector('.toggle-text');
+        const fullNameInput = document.getElementById('full-name');
+        
+        let isLoginMode = true;
+
+        function toggleMode() {
+            isLoginMode = !isLoginMode; 
+
+            if (isLoginMode) {
+                authTitle.textContent = "Sign In";
+                nameGroup.style.display = 'none';
+                fullNameInput.removeAttribute('required');
+                submitButton.textContent = "Sign In";
+                toggleText.innerHTML = 'Don\'t have an account? <span class="toggle-link" onclick="toggleMode()">Register Now</span>';
+            } else {
+                authTitle.textContent = "Register Account";
+                nameGroup.style.display = 'block';
+                fullNameInput.setAttribute('required', 'required');
+                submitButton.textContent = "Register";
+                toggleText.innerHTML = 'Already have an account? <span class="toggle-link" onclick="toggleMode()">Sign In</span>';
+            }
+        }
+        
+        document.getElementById('auth-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            const email = document.getElementById('email').value;
+
+            if (!isLoginMode) {
+                // --- STEP 1: REGISTER -> REDIRECT TO SIGN IN ---
+                alert(`Registration successful for ${email}. Please sign in now.`);
+                
+                // Switch the form mode to Sign In
+                toggleMode();
+                
+                // Update button text explicitly for clarity
+                submitButton.textContent = "Sign In";
+
+            } else {
+                // --- STEP 2: SIGN IN -> REDIRECT TO HOME PAGE ---
+                alert(`Sign in successful for ${email}. Redirecting to homepage...`);
+                
+                // Redirect to homepage with the 'logged_in' status
+                window.location.href = 'index.html?status=logged_in';
+            }
+        });
+
+        // Ensure the navigation bar logic is handled on the auth page too
+        // (This function will replace the Sign In/Register buttons if the user somehow navigates here while 'logged_in')
+        function checkLoginStatus() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('status') === 'logged_in') {
+                const signInRegisterBtn = document.getElementById('nav-signin');
+                const help = document.getElementById('nav-help');
+
+                if (signInRegisterBtn && help) {
+                    signInRegisterBtn.style.display = 'none';
+                    help.style.display = 'inline-block';
+                    help.href = 'help.html';
+                }
+            }
+        }
+        checkLoginStatus();
+    </script>
+</body>
+</html>

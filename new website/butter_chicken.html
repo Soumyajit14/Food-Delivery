@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butter Chicken | FlavorFinder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        main {
+            padding: 40px 5%;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .container h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .item-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .item-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            width: 280px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .item-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-details h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+            color: #333;
+        }
+        .item-details p {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .price {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ff5a5f;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn, .quantity-selector {
+            width: 100%;
+        }
+        .add-to-cart-btn {
+            padding: 12px;
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .quantity-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quantity-btn {
+            background-color: #ff5a5f;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .quantity-display {
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo">FlavorFinder</div>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html" style="font-weight: bold; color: #ff5a5f;">Home</a>
+            <a href="restaurant.html">Restaurants</a>
+            <a href="deals.html">Deals</a>
+            <a href="cart.html">Cart</a>
+            <a href="help.html">Help</a>
+            <a href="auth.html" class="primary-btn" id="nav-register" style="text-decoration: none; padding: 10px 20px;">Sign In / Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Butter Chicken Delights</h1>
+            <div class="item-grid">
+
+                <div class="item-card" data-name="Classic Butter Chicken" data-price="450">
+                    <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2023/04/butter-chicken-recipe.jpg" alt="Classic Butter Chicken">
+                    <div class="item-details">
+                        <h2>Classic Butter Chicken</h2>
+                        <p>Tender chicken in a mildly spiced, aromatic, buttery, and creamy tomato gravy. A classic favorite.</p>
+                        <p class="price">₹450</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Butter Chicken with Naan" data-price="520">
+                    <img src="https://nickskitchen.com/wp-content/uploads/2025/08/NK_Butter-Ckn_1-1200x664.jpg" alt="Butter Chicken with Naan">
+                    <div class="item-details">
+                        <h2>Butter Chicken w/ Naan</h2>
+                        <p>Our classic Butter Chicken served with two fluffy, freshly-baked butter naans.</p>
+                        <p class="price">₹520</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-name="Butter Chicken Biryani" data-price="580">
+                    <img src="https://poonjiaji.com/cdn/shop/articles/Butter-Chicken-Biryani-1024x768.jpg?v=1694593703" alt="Butter Chicken Biryani">
+                    <div class="item-details">
+                        <h2>Butter Chicken Biryani</h2>
+                        <p>A luxurious fusion of flavorful Butter Chicken gravy layered with fragrant biryani rice.</p>
+                        <p class="price">₹580</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+                        <div class="quantity-selector hidden">
+                            <button class="quantity-btn" onclick="decrementQuantity(this)">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn" onclick="incrementQuantity(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FlavorFinder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // The JavaScript is the same for all item pages
+        window.onload = function() {
+            initializePage();
+        };
+
+        function initializePage() {
+            const cart = getCart();
+            document.querySelectorAll('.item-card').forEach(card => {
+                const name = card.dataset.name;
+                const cartItem = cart.find(item => item.name === name);
+                if (cartItem) {
+                    updateCardUI(card, cartItem.quantity);
+                }
+            });
+        }
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem('flavorFinderCart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('flavorFinderCart', JSON.stringify(cart));
+        }
+
+        function addToCart(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            const price = parseInt(card.dataset.price);
+            let cart = getCart();
+            cart.push({ name, price, quantity: 1 });
+            saveCart(cart);
+            updateCardUI(card, 1);
+        }
+
+        function incrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity++;
+                saveCart(cart);
+                updateCardUI(card, item.quantity);
+            }
+        }
+
+        function decrementQuantity(button) {
+            const card = button.closest('.item-card');
+            const name = card.dataset.name;
+            let cart = getCart();
+            const itemIndex = cart.findIndex(i => i.name === name);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity--;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+                saveCart(cart);
+                updateCardUI(card, cart[itemIndex] ? cart[itemIndex].quantity : 0);
+            }
+        }
+
+        function updateCardUI(card, quantity) {
+            const addToCartBtn = card.querySelector('.add-to-cart-btn');
+            const quantitySelector = card.querySelector('.quantity-selector');
+            const quantityDisplay = card.querySelector('.quantity-display');
+
+            if (quantity > 0) {
+                addToCartBtn.classList.add('hidden');
+                quantitySelector.classList.remove('hidden');
+                quantityDisplay.textContent = quantity;
+            } else {
+                addToCartBtn.classList.remove('hidden');
+                quantitySelector.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

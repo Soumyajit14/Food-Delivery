@@ -1,0 +1,214 @@
+/* --- Global Styles & Reset --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.primary-btn {
+    background-color: #ff5a5f; /* A warm, engaging color (Red/Coral) */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #e0484d;
+}
+
+/* --- Header & Navigation --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #ff5a5f;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    margin-right: 20px; /* This provides the spacing */
+    font-weight: 500;
+}
+
+/* --- Hero Section --- */
+#hero {
+    /* **CRITICAL**: Replace 'your-food-background.jpg' with the actual file path 
+       and name of your background image. */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                url('https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141353.jpg'); 
+                
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    
+    height: 50vh; /* 50% of viewport height (Kept from previous code) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; /* Ensures text is readable against a dark background */
+}
+
+/* Ensure the image tag we added previously is removed from the hero content
+   or styled to not interfere, if you intend for only the background image to show. */
+#hero-feature-img {
+    display: none; /* Temporarily hide the smaller image if it interferes */
+}
+
+.hero-content {
+    max-width: 700px;
+    padding: 20px;
+}
+
+#hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: white;
+}
+
+#hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* --- Search Box --- */
+.search-box {
+    display: flex;
+    background-color: rgb(254, 254, 254);
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-box input {
+    flex-grow: 1;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1em;
+    /* Removed the specific border-radius to allow the button's radius to define the corner */
+    border-radius: 6px 0 0 6px; 
+    outline: none;
+}
+
+.search-btn {
+    padding: 15px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* --- Categories Section --- */
+#categories {
+    text-align: center;
+    padding: 40px 5%;
+}
+
+#categories h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.category-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+    width: 200px;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+}
+
+.category-card h3 {
+    margin: 10px 0 15px;
+    font-size: 1.1em;
+}
+
+.see-all {
+    color: #ff5a5f;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.see-all:hover {
+    text-decoration: underline;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 20px 5%;
+    background-color: #333;
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+/* --- Basic Responsiveness --- */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2em;
+    }
+    .search-box {
+        flex-direction: column;
+    }
+    .search-box input, .search-btn {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 6px;
+    }
+    /* Ensure the button and input stack correctly on mobile */
+    .search-box input {
+        border-radius: 6px; /* Full radius on mobile */
+    }
+    .search-btn {
+        margin-bottom: 0;
+    }
+
+    .category-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .category-card {
+        width: 45%;
+        margin-bottom: 20px;
+    }
+}
